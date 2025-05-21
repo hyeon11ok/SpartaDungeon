@@ -4,14 +4,8 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// 플레이어 이동 및 회전 스크립트
 /// </summary>
-public class PlayerController:MonoBehaviour
+public class PlayerController:BaseController
 {
-    private Rigidbody _rigidbody;
-
-    [Header("Moving")]
-    [SerializeField] private float moveSpeed;
-    private Vector2 moveDir;
-
     [Header("Jumping")]
     [SerializeField] private float jumpForce;
     [SerializeField] private LayerMask groundLayer;
@@ -27,16 +21,9 @@ public class PlayerController:MonoBehaviour
     [SerializeField] [Range(0.1f, 1.0f)] private float mouseSensitivity; // 마우스 감도
     private Vector2 mouseDelta; // 마우스 이동량
 
-
-
-    private void Awake()
+    protected override void FixedUpdate()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
+        base.FixedUpdate();
         if(isJumpingInput)
         {
             Jump();
@@ -46,20 +33,6 @@ public class PlayerController:MonoBehaviour
     private void LateUpdate()
     {
         Look();
-    }
-
-    private void Move()
-    {
-        Vector3 dir = transform.forward * moveDir.y + transform.right * moveDir.x;
-        dir *= moveSpeed;
-        dir.y = _rigidbody.velocity.y;
-
-        _rigidbody.velocity = dir;
-    }
-
-    public void SetDir(Vector2 dir)
-    {
-        moveDir = dir;
     }
 
     private void Jump()
