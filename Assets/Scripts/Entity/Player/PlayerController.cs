@@ -19,6 +19,15 @@ public class PlayerController:MonoBehaviour
     private float lastJumpTime = 0; // 마지막 점프 시간
     private bool isJumpingInput = false; // 점프 입력 여부
 
+    [Header("Look")]
+    [SerializeField] private Transform cameraContainer;
+    [SerializeField] private float minXRot;
+    [SerializeField] private float maxXRot;
+    private float curXRot; // 현재 카메라 X축 회전 각도
+    [SerializeField] [Range(0.1f, 1.0f)] private float mouseSensitivity; // 마우스 감도
+    private Vector2 mouseDelta; // 마우스 이동량
+
+
 
     private void Awake()
     {
@@ -32,6 +41,11 @@ public class PlayerController:MonoBehaviour
         {
             Jump();
         }
+    }
+
+    private void LateUpdate()
+    {
+        Look();
     }
 
     private void Move()
@@ -81,5 +95,21 @@ public class PlayerController:MonoBehaviour
         }
 
         return false;
+    }
+
+    private void Look()
+    {
+        // x축 기준으로 카메라 회전 == 상하 회전
+        curXRot += mouseDelta.y * mouseSensitivity * 0.1f;
+        curXRot = Mathf.Clamp(curXRot, minXRot, maxXRot);
+        cameraContainer.localEulerAngles = new Vector3(-curXRot, 0, 0);
+
+        // y축 기준으로 플레이어 회전 == 좌우 회전
+        transform.localEulerAngles += new Vector3(0, mouseDelta.x * mouseSensitivity * 0.1f, 0);
+    }
+
+    public void SetLookDelta(Vector2 delta)
+    {
+        mouseDelta = delta;
     }
 }

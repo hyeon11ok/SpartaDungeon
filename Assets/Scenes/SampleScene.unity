@@ -322,6 +322,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpRate: 0.3
+  cameraContainer: {fileID: 826105722}
+  minXRot: -85
+  maxXRot: 85
+  mouseSensitivity: 0.27
 --- !u!114 &755410243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +383,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c3d981e8-c76c-4836-8aae-6dd3560aae7b
     m_ActionName: Player/New action1
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 755410244}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnLookInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e47d8b16-0ddb-45a3-b96e-e5e3e6673e21
+    m_ActionName: Player/Look[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

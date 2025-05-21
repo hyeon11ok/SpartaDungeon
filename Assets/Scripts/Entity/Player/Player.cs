@@ -36,4 +36,9 @@ public class Player : MonoBehaviour
             Controller.IsInputJumpingAction(false);
         }
     }
+
+    public void OnLookInput(InputAction.CallbackContext context)
+    {
+        Controller.SetLookDelta(context.ReadValue<Vector2>());
+    }
 }
