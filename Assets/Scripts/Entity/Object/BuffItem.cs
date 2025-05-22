@@ -18,7 +18,7 @@ public class BuffItem:ItemObject
 
     private void OnDisable()
     {
-        OnBuffActive -= CharacterManager.Instance._Player.OnBuffStart;
+        OnBuffActive = null;
     }
 
     public override void OnInteract()

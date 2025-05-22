@@ -47,5 +47,10 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         IsAwakeDone = true;
     }
 
+    private void OnDisable()
+    {
+        IsAwakeDone = false;
+    }
+    
     protected abstract void Initialize();
 }

@@ -18,12 +18,6 @@ public class ConditionUI : BaseUI
         }));
     }
 
-    private void OnDisable()
-    {
-        CharacterManager.Instance._Player.Condition.GetCondition(ConditionType.Health).OnValueChanged -= UpdateHealthImg;
-        CharacterManager.Instance._Player.Condition.GetCondition(ConditionType.Stamina).OnValueChanged -= UpdateStaminaImg;
-    }
-
     public void UpdateHealthImg(Condition condition)
     {
         healthImg.fillAmount = condition.CurValue / condition.MaxValue;
@@ -32,11 +26,5 @@ public class ConditionUI : BaseUI
     public void UpdateStaminaImg(Condition condition)
     {
         staminaImg.fillAmount = condition.CurValue / condition.MaxValue;
-    }
-
-    protected IEnumerator WaitForSubscribe(Action action)
-    {
-        yield return new WaitUntil(() => CharacterManager.IsAwakeDone);
-        action();
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,5 +27,11 @@ public abstract class BaseUI : MonoBehaviour
     public virtual void SetUIActive(bool isActive)
     {
         gameObject.SetActive(isActive);
+    }
+
+    protected IEnumerator WaitForSubscribe(Action action)
+    {
+        yield return new WaitUntil(() => CharacterManager.IsAwakeDone);
+        action();
     }
 }

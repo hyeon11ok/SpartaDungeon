@@ -1,5 +1,15 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+/// <summary>
+/// 플레이어의 시점 타입을 정의합니다.
+/// </summary>
+public enum ViewType
+{
+    FirstPerson,
+    ThirdPerson
+}
 
 /// <summary>
 /// 플레이어 이동 및 회전 스크립트
@@ -19,16 +29,32 @@ public class PlayerController:BaseController
     private bool isJumpingInput = false; // 점프 입력 여부
 
     [Header("Look")]
-    [SerializeField] private Transform cameraContainer;
+    [SerializeField] private Transform cameraContainer; // 카메라의 회전축
+    [SerializeField] private Transform cam; // 카메라 위치
     [SerializeField] private float minXRot;
     [SerializeField] private float maxXRot;
     private float curXRot; // 현재 카메라 X축 회전 각도
     [SerializeField] [Range(0.1f, 1.0f)] private float mouseSensitivity; // 마우스 감도
     private Vector2 mouseDelta; // 마우스 이동량
 
+    [Header("Camera")]
+    [SerializeField] private Vector3 fpsPivot;
+    [SerializeField] private Vector3 tpsPivot;
+    [SerializeField] private Vector3 tpsRot;
+    [SerializeField] private ViewType viewType; // 시점 타입
+    [SerializeField] private float tpsTargetHeight;
+    [SerializeField] private float switchingSpeed; // 카메라 전환 속도
+    private IEnumerator camSwitchCoroutine;
+
+
     public void AddSpeed(float amount)
     {
         moveSpeed += amount;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(MoveCamera());
     }
 
     protected override void FixedUpdate()
@@ -122,5 +148,52 @@ public class PlayerController:BaseController
     public void SetLookDelta(Vector2 delta)
     {
         mouseDelta = delta;
+    }
+
+    public void SwitchCameraPosition()
+    {
+        if(viewType == ViewType.FirstPerson)
+        {
+            viewType = ViewType.ThirdPerson;
+        }
+        else
+        {
+            viewType = ViewType.FirstPerson;
+        }
+
+        if(camSwitchCoroutine != null)
+        {
+            StopCoroutine(camSwitchCoroutine);
+        }
+
+        camSwitchCoroutine = MoveCamera();
+        StartCoroutine(camSwitchCoroutine);
+    }
+
+    private IEnumerator MoveCamera()
+    {
+        Vector3 targetPos;
+        Vector3 targetRot;
+
+        if(viewType == ViewType.FirstPerson)
+        {
+            targetPos = fpsPivot;
+            targetRot = Vector3.zero;
+        }
+        else
+        {
+            targetPos = tpsPivot;
+            targetRot = tpsRot;
+        }
+
+        while(Vector3.Distance(cam.localPosition, targetPos) > 0.1f && Vector3.Distance(cam.eulerAngles, targetRot) > 0.1f)
+        {
+            cam.localPosition = Vector3.Lerp(cam.localPosition, targetPos, Time.deltaTime * switchingSpeed);
+            cam.localEulerAngles = Vector3.Lerp(cam.localEulerAngles, targetRot, Time.deltaTime * switchingSpeed);
+            yield return null;
+        }
+
+        cam.localPosition = targetPos;
+        cam.localEulerAngles = targetRot;
     }
 }

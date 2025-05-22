@@ -91,6 +91,14 @@ public class Player:MonoBehaviour
         }
     }
 
+    public void OnViewChangeInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            Controller.SwitchCameraPosition();
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(TypeCheck<ICollsionEnter>(collision.gameObject))
