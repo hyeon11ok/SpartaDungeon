@@ -74,6 +74,11 @@ public class PlayerCondition : MonoBehaviour
         }
     }
 
+    public bool CanUseStamina(float amount)
+    {
+        return GetCondition(ConditionType.Stamina).CurValue >= amount;
+    }
+
     public void UseStamina(float amount)
     {
         GetCondition(ConditionType.Stamina).Decrease(amount);

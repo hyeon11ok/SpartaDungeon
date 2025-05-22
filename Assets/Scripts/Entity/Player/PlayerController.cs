@@ -86,6 +86,12 @@ public class PlayerController:BaseController
     /// <param name="isRun">달리기 여부</param>
     public void SwitchRunMode(bool isRun)
     {
+        if(!CharacterManager.Instance._Player.Condition.CanUseStamina(moveStamina * Time.deltaTime))
+        {
+            isRun = false; // 스태미너가 부족하면 달리기 모드 해제
+            return;
+        }
+
         if(isRun)
         {
             moveSpeed += runSpeed;
@@ -101,7 +107,7 @@ public class PlayerController:BaseController
     private void Jump()
     {
         // 점프 쿨타임이 지나고 바닥에 닿아있을 때 점프
-        if(isGrounded() && Time.time - lastJumpTime > jumpRate)
+        if(isGrounded() && Time.time - lastJumpTime > jumpRate && CharacterManager.Instance._Player.Condition.CanUseStamina(jumpStamina))
         {
             _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
