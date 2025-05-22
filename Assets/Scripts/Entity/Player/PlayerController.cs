@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PlayerController:BaseController
 {
-    [SerializeField]private float moveStamina; // 이동 속도
+    [SerializeField] private float moveStamina; // 이동 속도
+    [SerializeField] private float runSpeed;
+    private bool isRun; // 달리기 여부
 
     [Header("Jumping")]
     [SerializeField] private float jumpStamina;
@@ -46,7 +48,24 @@ public class PlayerController:BaseController
     protected override void Move()
     {
         base.Move();
-        // CharacterManager.Instance._Player.Condition.UseStamina(moveStamina * Time.deltaTime); // 이동 시 스태미너 감소
+        if(isRun)
+        {
+            CharacterManager.Instance._Player.Condition.UseStamina(moveStamina * Time.deltaTime); // 이동 시 스태미너 감소
+        }
+    }
+
+    public void SwitchRunMode(bool isRun)
+    {
+        if(isRun)
+        {
+            moveSpeed += runSpeed;
+            this.isRun = true;
+        }
+        else
+        {
+            moveSpeed -= runSpeed;
+            this.isRun = false;
+        }
     }
 
     private void Jump()

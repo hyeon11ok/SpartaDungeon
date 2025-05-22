@@ -80,6 +80,18 @@ public class Player:MonoBehaviour
         return component.GetComponent<T>() != null;
     }
 
+    public void OnRunInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            Controller.SwitchRunMode(true);
+        }
+        else if(context.phase == InputActionPhase.Canceled)
+        {
+            Controller.SwitchRunMode(false);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(TypeCheck<ICollsionEnter>(collision.gameObject))
