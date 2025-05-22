@@ -3,7 +3,8 @@ using UnityEngine;
 
 public enum ConditionType
 {
-    Health
+    Health,
+    Stamina
 }
 
 [Serializable]
@@ -13,12 +14,25 @@ public class Condition
     public float CurValue { get; private set; }
     [SerializeField] private float startValue;
     [SerializeField] private ConditionType conditionType;
+    [SerializeField] private float passiveValue; // 자동 회복/감소량
+    [SerializeField] private bool isPassive; // 자동 회복/감소 여부
 
     public ConditionType ConditionType => conditionType;
+    public bool IsPassive => isPassive;
 
     public void Init()
     {
         CurValue = startValue;
+    }
+
+    public void Passive()
+    {
+        CurValue += passiveValue * Time.deltaTime;
+
+        if(CurValue > maxValue)
+            CurValue = maxValue;
+        else if(CurValue < 0)
+            CurValue = 0;
     }
 
     /// <summary>

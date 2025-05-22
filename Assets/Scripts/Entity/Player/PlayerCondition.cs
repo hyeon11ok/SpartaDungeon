@@ -10,30 +10,70 @@ public class PlayerCondition : MonoBehaviour
     /// </summary>
     public event Action<float> OnHealthChanged;
 
-    [SerializeField] private Condition health;
+    [SerializeField] private List<Condition> conditionsList;
+    private Condition[] passiveConditions;
 
-    public Condition Health => health;
+    public Condition Health => GetCondition(ConditionType.Health);
+    public Condition Stamina => GetCondition(ConditionType.Stamina);
 
     private void Start()
     {
-        health.Init();
-        OnHealthChanged?.Invoke(health.GetValuePer());
+        foreach(Condition con in conditionsList)
+        {
+            con.Init();
+        }
+
+        passiveConditions = GetCondition(true);
+        OnHealthChanged?.Invoke(GetCondition(ConditionType.Health).GetValuePer());
+    }
+
+    private void Update()
+    {
+        for(int i = 0; i < passiveConditions.Length; i++)
+        {
+            passiveConditions[i].Passive();
+        }
+    }
+
+    /// <summary>
+    /// 지정된 타입과 일치하는 Condition을 반환합니다.
+    /// </summary>
+    /// <param name="conditionType">목표 타입</param>
+    /// <returns></returns>
+    private Condition GetCondition(ConditionType conditionType)
+    {
+        return conditionsList.Find((x) => x.ConditionType == conditionType);
+    }
+
+    /// <summary>
+    /// 지정된 passive 여부와 일치하는 Condition들을 반환합니다.
+    /// </summary>
+    /// <param name="isPassive"></param>
+    /// <returns></returns>
+    private Condition[] GetCondition(bool isPassive)
+    {
+        return conditionsList.FindAll((x) => x.IsPassive == isPassive).ToArray();
     }
 
     public void Heal(float amount)
     {
-        health.Increase(amount);
-        OnHealthChanged?.Invoke(health.GetValuePer());
+        GetCondition(ConditionType.Health).Increase(amount);
+        OnHealthChanged?.Invoke(GetCondition(ConditionType.Health).GetValuePer());
     }
 
     public void TakeDamage(float amount)
     {
-        health.Decrease(amount);
-        OnHealthChanged?.Invoke(health.GetValuePer());
-        if(health.CurValue <= 0)
+        GetCondition(ConditionType.Health).Decrease(amount);
+        OnHealthChanged?.Invoke(GetCondition(ConditionType.Health).GetValuePer());
+        if(GetCondition(ConditionType.Health).CurValue <= 0)
         {
             Die();
         }
+    }
+
+    public void UseStamina(float amount)
+    {
+        GetCondition(ConditionType.Stamina).Decrease(amount);
     }
 
     private void Die()
