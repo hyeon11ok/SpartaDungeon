@@ -30,6 +30,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
+    public static bool IsAwakeDone { get; private set; } = false;
+
     protected void Awake()
     {
         if(instance == null)
@@ -38,7 +40,11 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             Initialize();
         }
         else
+        {
             Destroy(gameObject);
+        }
+
+        IsAwakeDone = true;
     }
 
     protected abstract void Initialize();

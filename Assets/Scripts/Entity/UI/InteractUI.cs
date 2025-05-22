@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InteractUI : BaseUI
 {
@@ -12,10 +13,13 @@ public class InteractUI : BaseUI
     private float lastCheckTime;
     [SerializeField] private float maxCheckDistance;
     private Camera cam;
-    private GameObject curInteractGameObject;
+    [SerializeField] private LayerMask interactLayerMask;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI interactText;
+
+    private GameObject curInteractGameObject;
+    private IInteractable curInteractable;
 
     protected override void Start()
     {
@@ -32,17 +36,19 @@ public class InteractUI : BaseUI
             Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit, maxCheckDistance))
+            if(Physics.Raycast(ray, out hit, maxCheckDistance, interactLayerMask))
             {
                 if(hit.collider.gameObject != curInteractGameObject)
                 {
                     curInteractGameObject = hit.collider.gameObject;
+                    curInteractable = hit.collider.GetComponent<IInteractable>();
                     SetInteractText();
                 }
             }
             else
             {
                 curInteractGameObject = null;
+                curInteractable = null;
                 interactText.gameObject.SetActive(false);
             }
 
@@ -52,6 +58,16 @@ public class InteractUI : BaseUI
     private void SetInteractText()
     {
         interactText.gameObject.SetActive(true);
-        interactText.text = curInteractGameObject.transform.name;
+        interactText.text = curInteractable.GetInteractPrompt();
+    }
+
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started && curInteractable != null)
+        {
+            curInteractable.OnInteract();
+            curInteractable = null;
+            interactText.gameObject.SetActive(false);
+        }
     }
 }

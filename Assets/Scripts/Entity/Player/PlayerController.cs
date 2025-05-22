@@ -21,6 +21,11 @@ public class PlayerController:BaseController
     [SerializeField] [Range(0.1f, 1.0f)] private float mouseSensitivity; // 마우스 감도
     private Vector2 mouseDelta; // 마우스 이동량
 
+    public void AddSpeed(float amount)
+    {
+        moveSpeed += amount;
+    }
+
     protected override void FixedUpdate()
     {
         base.FixedUpdate();

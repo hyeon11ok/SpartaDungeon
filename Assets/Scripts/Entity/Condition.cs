@@ -1,12 +1,20 @@
 using System;
 using UnityEngine;
 
+public enum ConditionType
+{
+    Health
+}
+
 [Serializable]
 public class Condition
 {
     [SerializeField] private float maxValue;
     public float CurValue { get; private set; }
     [SerializeField] private float startValue;
+    [SerializeField] private ConditionType conditionType;
+
+    public ConditionType ConditionType => conditionType;
 
     public void Init()
     {

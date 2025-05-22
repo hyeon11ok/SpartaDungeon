@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +7,14 @@ public class ConditionUI : BaseUI
 
     [SerializeField] private Image healthImg;
 
-    protected override void Start()
+    private void OnEnable()
     {
-        base.Start();
-        PlayerManager.Instance.Player.Condition.OnHealthChanged += UpdateHealthImg;
+        CharacterManager.Instance._Player.Condition.OnHealthChanged += UpdateHealthImg;        
+    }
+
+    private void OnDisable()
+    {
+        CharacterManager.Instance._Player.Condition.OnHealthChanged -= UpdateHealthImg;
     }
 
     public void UpdateHealthImg(float value)

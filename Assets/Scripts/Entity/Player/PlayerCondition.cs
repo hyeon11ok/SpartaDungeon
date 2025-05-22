@@ -12,6 +12,8 @@ public class PlayerCondition : MonoBehaviour
 
     [SerializeField] private Condition health;
 
+    public Condition Health => health;
+
     private void Start()
     {
         health.Init();

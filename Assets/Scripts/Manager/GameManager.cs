@@ -10,8 +10,27 @@ public class GameManager : Singleton<GameManager>
 {
     public UIManager UIManager { get; private set; }
 
+    private void Start()
+    {
+        SetCursor(true);
+    }
+
     protected override void Initialize()
     {
         UIManager = GetComponent<UIManager>();
+    }
+
+    public void SetCursor(bool isLock)
+    {
+        if(isLock)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
