@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody), typeof(PlayerController))]
+[RequireComponent(typeof(Rigidbody), typeof(PlayerController), typeof(PlayerCondition))]
 public class Player : MonoBehaviour
 {
     public PlayerController Controller { get; private set; }
+    public PlayerCondition Condition { get; private set; }
 
     private void Awake()
     {
         Controller = GetComponent<PlayerController>();
+        Condition = GetComponent<PlayerCondition>();
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
