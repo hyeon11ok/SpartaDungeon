@@ -16,7 +16,9 @@ public class Condition
     [SerializeField] private ConditionType conditionType;
     [SerializeField] private float passiveValue; // 자동 회복/감소량
     [SerializeField] private bool isPassive; // 자동 회복/감소 여부
+    public Action<Condition> OnValueChanged; // 값이 변경될 때 호출되는 이벤트
 
+    public float MaxValue => maxValue; // 최대값
     public ConditionType ConditionType => conditionType;
     public bool IsPassive => isPassive;
 
@@ -27,7 +29,7 @@ public class Condition
 
     public void Passive()
     {
-        CurValue += passiveValue * Time.deltaTime;
+        Increase(passiveValue * Time.deltaTime);
 
         if(CurValue > maxValue)
             CurValue = maxValue;
@@ -44,6 +46,8 @@ public class Condition
         CurValue += value;
         if(CurValue > maxValue)
             CurValue = maxValue;
+
+        OnValueChanged?.Invoke(this);
     }
 
     /// <summary>
@@ -55,6 +59,8 @@ public class Condition
         CurValue -= value;
         if(CurValue < 0)
             CurValue = 0;
+
+        OnValueChanged?.Invoke(this);
     }
 
     public float GetValuePer()

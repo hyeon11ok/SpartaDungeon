@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PlayerController:BaseController
 {
+    [SerializeField]private float moveStamina; // 이동 속도
+
     [Header("Jumping")]
+    [SerializeField] private float jumpStamina;
     [SerializeField] private float jumpForce;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float jumpRate; // 점프 쿨타임
@@ -40,6 +43,12 @@ public class PlayerController:BaseController
         Look();
     }
 
+    protected override void Move()
+    {
+        base.Move();
+        // CharacterManager.Instance._Player.Condition.UseStamina(moveStamina * Time.deltaTime); // 이동 시 스태미너 감소
+    }
+
     private void Jump()
     {
         // 점프 쿨타임이 지나고 바닥에 닿아있을 때 점프
@@ -48,6 +57,7 @@ public class PlayerController:BaseController
             _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             lastJumpTime = Time.time;
+            CharacterManager.Instance._Player.Condition.UseStamina(jumpStamina); // 점프 시 스태미너 감소
         }
     }
 
