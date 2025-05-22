@@ -31,14 +31,6 @@ public class PlayerCondition : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        for(int i = 0; i < passiveConditions.Length; i++)
-        {
-            passiveConditions[i].OnValueChanged = null;
-        }
-    }
-
     /// <summary>
     /// 지정된 타입과 일치하는 Condition을 반환합니다.
     /// </summary>

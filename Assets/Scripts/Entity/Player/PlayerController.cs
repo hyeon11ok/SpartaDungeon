@@ -37,6 +37,13 @@ public class PlayerController:BaseController
     [SerializeField] [Range(0.1f, 1.0f)] private float mouseSensitivity; // 마우스 감도
     private Vector2 mouseDelta; // 마우스 이동량
 
+    [Header("Climb")]
+    [SerializeField] private float climbSpeed; // 등반 속도
+    [SerializeField] private float rayHeight; // 벽 체크 레이 높이
+    [SerializeField] private float rayWidth; // 벽 체크 레이 너비
+    [SerializeField] private LayerMask climbLayer; // 등반 가능한 레이어
+    [SerializeField] private float climbStamina; // 등반 시 소모되는 스태미너
+
     [Header("Camera")]
     [SerializeField] private Vector3 fpsPivot;
     [SerializeField] private Vector3 tpsPivot;
@@ -78,6 +85,7 @@ public class PlayerController:BaseController
         {
             CharacterManager.Instance._Player.Condition.UseStamina(moveStamina * Time.deltaTime); // 이동 시 스태미너 감소
         }
+        Climb();
     }
 
     /// <summary>
@@ -116,6 +124,37 @@ public class PlayerController:BaseController
         }
     }
 
+    private void Climb()
+    {
+        // 벽에 붙어있고 앞으로 이동할 때 벽을 기어오르는 동작
+        if(IsStickToWall() && moveDir.y > 0 && CharacterManager.Instance._Player.Condition.CanUseStamina(climbStamina * Time.deltaTime))
+        {
+            Debug.Log("Climbing");
+            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, 0);
+            _rigidbody.AddForce(Vector3.up * climbSpeed, ForceMode.VelocityChange);
+            CharacterManager.Instance._Player.Condition.UseStamina(climbStamina * Time.deltaTime);
+        }
+    }
+
+    private bool IsStickToWall()
+    {
+        Ray[] rays = new Ray[5];
+        rays[0] = new Ray(transform.position + (Vector3.up * rayHeight), Vector3.forward); // 상
+        rays[1] = new Ray(transform.position, Vector3.forward); // 하
+        rays[2] = new Ray(transform.position - (transform.right * rayWidth) + (Vector3.up * rayHeight / 2), Vector3.forward); // 좌
+        rays[3] = new Ray(transform.position + (transform.right * rayWidth) + (Vector3.up * rayHeight / 2), Vector3.forward); // 우
+        rays[4] = new Ray(transform.position + (Vector3.up * rayHeight / 2), Vector3.forward); // 중앙
+
+        for(int i = 0; i < rays.Length; i++)
+        {
+            if(Physics.Raycast(rays[i], out RaycastHit hit, 1f, climbLayer))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void IsInputJumpingAction(bool value)
     {
         isJumpingInput = value;
@@ -123,11 +162,12 @@ public class PlayerController:BaseController
 
     private bool isGrounded()
     {
-        Ray[] rays = new Ray[4];
+        Ray[] rays = new Ray[5];
         rays[0] = new Ray(transform.position + (transform.forward * 0.2f) + (Vector3.up * 0.1f), Vector3.down);
         rays[1] = new Ray(transform.position - (transform.forward * 0.2f) + (Vector3.up * 0.1f), Vector3.down);
         rays[2] = new Ray(transform.position + (transform.right * 0.2f) + (Vector3.up * 0.1f), Vector3.down);
         rays[3] = new Ray(transform.position - (transform.right * 0.2f) + (Vector3.up * 0.1f), Vector3.down);
+        rays[3] = new Ray(transform.position + (Vector3.up * 0.1f), Vector3.down);
 
         for(int i = 0; i < rays.Length; i++)
         {
