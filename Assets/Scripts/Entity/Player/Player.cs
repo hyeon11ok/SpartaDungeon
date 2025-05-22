@@ -43,4 +43,17 @@ public class Player : MonoBehaviour
     {
         Controller.SetLookDelta(context.ReadValue<Vector2>());
     }
+
+    private bool TypeCheck<T>(GameObject component)
+    {
+        return component.GetComponent<T>() != null;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(TypeCheck<ICollsionEnter>(collision.gameObject))
+        {
+            collision.gameObject.GetComponent<ICollsionEnter>().EnterEvent(gameObject);
+        }
+    }
 }
