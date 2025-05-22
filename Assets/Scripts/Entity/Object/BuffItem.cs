@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 버프 아이템을 나타내는 클래스입니다.
+/// </summary>
 public class BuffItem:ItemObject
 {
     [SerializeField] private BuffItemSO data;
@@ -23,8 +26,6 @@ public class BuffItem:ItemObject
         OnBuffActive?.Invoke(data.Buffs, data.BuffDuration);
         base.OnInteract();
     }
-
-    
 
     public override string GetInteractPrompt()
     {

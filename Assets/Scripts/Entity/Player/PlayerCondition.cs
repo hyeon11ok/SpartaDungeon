@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerCondition : MonoBehaviour
 {
     [SerializeField] private List<Condition> conditionsList = new List<Condition>();
-    private Condition[] passiveConditions;
+    private Condition[] passiveConditions; // 값이 자동으로 증감하는 Condition들
 
     public Condition Health => GetCondition(ConditionType.Health);
     public Condition Stamina => GetCondition(ConditionType.Stamina);

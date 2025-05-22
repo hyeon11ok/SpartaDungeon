@@ -17,7 +17,6 @@ public class Player:MonoBehaviour
 
     public void OnBuffStart(ItemDataBuff[] buffs, float buffDuration)
     {
-        Debug.Log("Buff Start");
         StartCoroutine(BuffCoroutine(buffs, buffDuration));
     }
 

@@ -1036,6 +1036,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpRate: 0.3
+  damagableSpeed: -7
+  dropDamage: 20
   cameraContainer: {fileID: 826105722}
   minXRot: -85
   maxXRot: 85

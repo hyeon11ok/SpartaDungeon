@@ -54,6 +54,10 @@ public class PlayerController:BaseController
         }
     }
 
+    /// <summary>
+    /// 달리기 모드 전환
+    /// </summary>
+    /// <param name="isRun">달리기 여부</param>
     public void SwitchRunMode(bool isRun)
     {
         if(isRun)
