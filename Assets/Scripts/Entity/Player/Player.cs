@@ -106,4 +106,28 @@ public class Player:MonoBehaviour
             collision.gameObject.GetComponent<ICollsionEnter>().EnterEvent(gameObject);
         }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(TypeCheck<ICollsionExit>(collision.gameObject))
+        {
+            collision.gameObject.GetComponent<ICollsionExit>().ExitEvent(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(TypeCheck<ICollsionEnter>(other.gameObject))
+        {
+            other.gameObject.GetComponent<ICollsionEnter>().EnterEvent(gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(TypeCheck<ICollsionExit>(other.gameObject))
+        {
+            other.gameObject.GetComponent<ICollsionExit>().ExitEvent(gameObject);
+        }
+    }
 }

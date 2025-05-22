@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerCondition : MonoBehaviour
 {
+    public event Action OnHit; // 피격 시 호출되는 이벤트
+
     [SerializeField] private List<Condition> conditionsList = new List<Condition>();
     private Condition[] passiveConditions; // 값이 자동으로 증감하는 Condition들
 
@@ -64,6 +66,7 @@ public class PlayerCondition : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        OnHit();
         GetCondition(ConditionType.Health).Decrease(amount);
         if(GetCondition(ConditionType.Health).CurValue <= 0)
         {
