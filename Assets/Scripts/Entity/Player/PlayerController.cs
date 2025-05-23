@@ -83,7 +83,10 @@ public class PlayerController:BaseController
         base.Move();
         if(isRun)
         {
-            CharacterManager.Instance._Player.Condition.UseStamina(moveStamina * Time.deltaTime); // 이동 시 스태미너 감소
+            if(!CharacterManager.Instance._Player.Condition.CanUseStamina(moveStamina * Time.deltaTime))
+                SwitchRunMode(false);
+            else 
+                CharacterManager.Instance._Player.Condition.UseStamina(moveStamina * Time.deltaTime); // 이동 시 스태미너 감소
         }
         Climb();
     }
@@ -94,11 +97,7 @@ public class PlayerController:BaseController
     /// <param name="isRun">달리기 여부</param>
     public void SwitchRunMode(bool isRun)
     {
-        if(!CharacterManager.Instance._Player.Condition.CanUseStamina(moveStamina * Time.deltaTime))
-        {
-            isRun = false; // 스태미너가 부족하면 달리기 모드 해제
-            return;
-        }
+        if(this.isRun == isRun) return; // 이미 같은 상태일 경우
 
         if(isRun)
         {
