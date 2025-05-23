@@ -1088,7 +1088,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109317114}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1109,7 +1109,7 @@ Transform:
   - {fileID: 3670136233255428897}
   - {fileID: 7510339011914693509}
   - {fileID: 1241980913}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 597657717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &111344744
 PrefabInstance:
@@ -5978,6 +5978,7 @@ Transform:
   - {fileID: 468559977}
   - {fileID: 76279292}
   - {fileID: 2063610635}
+  - {fileID: 109317115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &617204100
@@ -12229,46 +12230,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: rayWidth
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: runSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: jumpForce
-      value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: moveSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: rayHeight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: climbSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: jumpStamina
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: moveStamina
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: climbStamina
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 447867193063726481, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: climbLayer.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
     - target: {fileID: 1123691472840348809, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.44
@@ -12309,30 +12270,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1876705009496588931, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: conditionsList.Array.data[1].startValue
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
-      value: 1067e892-b5ba-473b-a968-55bca31e7e6d
-      objectReference: {fileID: 0}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
-      value: Player/Restart[/Keyboard/escape]
-      objectReference: {fileID: 0}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -12341,26 +12278,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1850413293}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnInteractInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReStartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4372055971595514984, guid: c6da45a7f8e269b4b8cdddab9d907df0, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20729,5 +20646,4 @@ SceneRoots:
   - {fileID: 1645223346}
   - {fileID: 424807796}
   - {fileID: 1964152764}
-  - {fileID: 109317115}
   - {fileID: 77045688}

@@ -147,7 +147,7 @@ public class PlayerController:BaseController
 
         for(int i = 0; i < rays.Length; i++)
         {
-            if(Physics.Raycast(rays[i], out RaycastHit hit, 1f, climbLayer))
+            if(Physics.Raycast(rays[i], out RaycastHit hit, 0.7f, climbLayer))
             {
                 return true;
             }

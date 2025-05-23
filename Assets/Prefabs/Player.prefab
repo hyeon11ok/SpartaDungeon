@@ -211,6 +211,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f298131c-162e-4f1b-abb3-157128e866b3
     m_ActionName: Player/ViewChange[/Keyboard/v]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ReStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1067e892-b5ba-473b-a968-55bca31e7e6d
+    m_ActionName: Player/Restart[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -252,11 +268,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c132541fe6bfb34e86391b82595f455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  moveStamina: 10
-  runSpeed: 2.5
-  jumpStamina: 10
-  jumpForce: 6.5
+  moveSpeed: 3
+  moveStamina: 20
+  runSpeed: 1.5
+  jumpStamina: 15
+  jumpForce: 5.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -266,6 +282,13 @@ MonoBehaviour:
   minXRot: -85
   maxXRot: 85
   mouseSensitivity: 0.27
+  climbSpeed: 1.5
+  rayHeight: 2
+  rayWidth: 0.5
+  climbLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  climbStamina: 25
   fpsPivot: {x: 0, y: 0, z: 0}
   tpsPivot: {x: 0, y: 1.5, z: -2.5}
   tpsRot: {x: 20, y: 0, z: 0}
@@ -291,7 +314,7 @@ MonoBehaviour:
     passiveValue: 0
     isPassive: 0
   - maxValue: 100
-    startValue: 70
+    startValue: 100
     conditionType: 1
     passiveValue: 5
     isPassive: 1
