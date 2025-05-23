@@ -1,6 +1,6 @@
 # SpartaDungeon
 
-[![Unity 2022.3.17f1](https://img.shields.io/badge/Unity-2022.3.17f1-00ced1.svg)](https://unity.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Unity 2022.3.17f1](https://img.shields.io/badge/Unity-2022.3.17f1-00ced1.svg)](https://unity.com) 
 
 ---
 
